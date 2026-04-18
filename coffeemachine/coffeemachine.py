@@ -5,11 +5,20 @@ class coffee_machine:
         self.coffee_beans = coffee_beans
         self.cups = cups
         self.money = money
+
     def fill(self):
-        self.water += int(input("Write how many ml of water you want to add:\n>"))
-        self.milk += int(input("Write how many ml of milk you want to add:\n>"))
-        self.coffee_beans += int(input("Write how many grams of coffee beans you want to add:\n>"))
-        self.cups += int(input("Write how many disposable cups you want to add:\n>"))
+        def read_int(prompt):
+            while True:
+                s = input(f"{prompt}\n>")
+                if s.isdigit():
+                    return int(s)
+                print("Please enter a valid number.")
+
+        self.water += read_int("Write how many ml of water you want to add:")
+        self.milk += read_int("Write how many ml of milk you want to add:")
+        self.coffee_beans += read_int("Write how many grams of coffee beans you want to add:")
+        self.cups += read_int("Write how many disposable cups you want to add:")
+
     def remaining(self):
         print("The coffee machine has:")
         print(f"{self.water} of water")
@@ -17,9 +26,11 @@ class coffee_machine:
         print(f"{self.coffee_beans} of coffee beans")
         print(f"{self.cups} of disposable cups")
         print(f"{self.money} of money")
+
     def take(self):
         print(f"I gave you {self.money}")
         self.money = 0
+
     def buy(self):
         coffeetype = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:\n>")
         if coffeetype == "1":
